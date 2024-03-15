@@ -7,9 +7,12 @@ CREATE Table "user"(
 CREATE Table post(
     id SERIAL PRIMARY KEY,
     title text NOT NULL,
-    user_id INTEGER REFERENCES "user"(id)
+    user_id INTEGER REFERENCES "user"(id) on delete set DEFAULT DEFAULT 2 
 )
 
+
+ALTER Table post
+    alter COLUMN user_id set NOT null;
 
 
 INSERT INTO "user" (username) VALUES
@@ -31,8 +34,30 @@ DROP Table "user";
 SELECT * from "user";
 SELECT * from post;
 
-SELECT title, username FROM post
-JOIN "user" ON post.user_id = "user".id
 
-SELECT * FROM post as p
-JOIN "user" u on p.user_id = u.id;
+
+
+
+
+
+
+INSERT INTO post (title, user_id) VALUES('test', NULL)
+
+
+
+
+-- Insertion constraint on INSERT post
+-- Attempting to insert a post with a user ID that does not exist
+-- Inserting a post with a valid user ID
+-- Attempting to insert a post without specifying a user ID
+
+
+DELETE FROM "user" 
+    WHERE id = 4;
+
+
+-- Deletion constraint on DELETE user
+-- Restrict Deletion -> ON DELETE RESTRICT / ON DELETE NO ACTION (default)
+-- Cascading Deletion -> ON DELETE CASCADE
+-- Setting NULL -> ON DELETE SET NULL
+-- Set Default value -> ON DELETE SET DEFAULT
