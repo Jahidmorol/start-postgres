@@ -48,4 +48,4 @@ DROP Table employees;
 
 -- SELECT max(salary) from employees WHERE department_name = 'HR'
 
-SELECT * FROM employees WHERE salary > (SELECT max(salary) from employees WHERE department_name = 'HR')
+SELECT * FROM employees WHERE salary > (SELECT max(salary) from employees WHERE department_name = 'HR'  )
